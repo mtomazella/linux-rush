@@ -1,26 +1,26 @@
 [
   {
     "name": "Lab1",
-    "lowerIpRange": "",
-    "upperIpRange": "",
-    "size": 10
+    "lowerIpRange": 0,
+    "upperIpRange": 50,
+    "size": 42
   },
   {
     "name": "Lab2",
-    "lowerIpRange": "",
-    "upperIpRange": "",
-    "size": 10
+    "lowerIpRange": 51,
+    "upperIpRange": 100,
+    "size": 20
   },
   {
     "name": "Lab3",
-    "lowerIpRange": "",
-    "upperIpRange": "",
-    "size": 10
+    "lowerIpRange": 101,
+    "upperIpRange": 150,
+    "size": 35
   },
   {
     "name": "Lab4",
-    "lowerIpRange": "",
-    "upperIpRange": "",
+    "lowerIpRange": 150,
+    "upperIpRange": 200,
     "size": 10
   }
 ]

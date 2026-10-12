@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Rush Leaderboard</title>
+    <title>Classificação Linux Rush</title>
     <style>
       :root {
         color-scheme: dark;
@@ -188,39 +188,48 @@
     <main>
       <header>
         <div>
-          <p class="eyebrow">Linux Rush / Live standings</p>
-          <h1>Leaderboard</h1>
+          <p class="eyebrow">Linux Rush / Classificação ao vivo</p>
+          <h1>Classificação</h1>
         </div>
         <div class="total">
           <strong id="total-wins">--</strong>
-          <span>Total wins</span>
+          <span>Vitórias totais</span>
         </div>
       </header>
 
       <section id="rankings" class="rankings" aria-live="polite">
-        <div class="message">Loading standings...</div>
+        <div class="message">Carregando classificação...</div>
       </section>
     </main>
 
     <script>
       const teamColors = new Map();
+      const availableColors = [
+        "#ff4d6d",
+        "#00c2a8",
+        "#4d8dff",
+        "#ff9f1c",
+        "#b56bff",
+        "#a8d500",
+      ];
 
       const colorForTeam = team => {
         if (!teamColors.has(team)) {
-          const hue = Math.floor(Math.random() * 360);
-          teamColors.set(team, `hsl(${hue} 75% 68%)`);
+          const colorIndex = Math.floor(Math.random() * availableColors.length);
+          const [color] = availableColors.splice(colorIndex, 1);
+          teamColors.set(team, color);
         }
         return teamColors.get(team);
       };
 
       const formatValue = (type, item) => {
         if (type === "completion") return `${Math.round(item.completion)}%`;
-        return item.timestamp ? new Date(item.timestamp).toLocaleString([], {
+        return item.timestamp ? new Date(item.timestamp).toLocaleString("pt-BR", {
           day: "numeric",
           month: "short",
           hour: "2-digit",
           minute: "2-digit",
-        }) : "No result";
+        }) : "Sem resultado";
       };
 
       const renderPanel = ({ title, hint, items, type }) => `
@@ -245,14 +254,14 @@
       const render = data => {
         document.querySelector("#total-wins").textContent = data.totalWins ?? 0;
         document.querySelector("#rankings").innerHTML = [
-          renderPanel({ title: "Speed", hint: "first flag", items: data.teamSpeedRank || [], type: "speed" }),
-          renderPanel({ title: "Completion", hint: "success rate", items: data.completionRank || [], type: "completion" }),
+          renderPanel({ title: "Velocidade", hint: "primeira flag", items: data.teamSpeedRank || [], type: "speed" }),
+          renderPanel({ title: "Conclusão", hint: "taxa de conclusão", items: data.completionRank || [], type: "completion" }),
         ].join("");
       };
 
       fetch("http://localhost:3494/leaderboard")
         .then(response => {
-          if (!response.ok) throw new Error("Unable to load standings");
+          if (!response.ok) throw new Error("Não foi possível carregar a classificação");
           return response.json();
         })
         .then(render)

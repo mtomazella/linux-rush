@@ -9,6 +9,7 @@ let writeQueue = Promise.resolve()
 exports.addRequest = async ({ ip, path, timestamp }) => {
   const write = writeQueue.then(async () => {
     const db = await client
+    await db.read()
     await db.update(data => {
       data.requests.push({ ip, path, timestamp })
     })

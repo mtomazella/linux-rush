@@ -8,7 +8,11 @@ exports.leaderboardRoute = async (req, res) => {
       const { ip, path } = request
       return {
         ...request,
-        team: 1,
+        team:
+          teams.find(team => {
+            const ipNum = parseInt(ip.split('.').pop(), 10)
+            return ipNum >= team.lowerIpRange && ipNum <= team.upperIpRange
+          })?.name || 'Unknown',
         isFlag: path === process.env.FLAG,
       }
     })
@@ -40,11 +44,13 @@ exports.leaderboardRoute = async (req, res) => {
       .map(({ team, timestamp }) => ({ team, timestamp }))
 
     const completionByTeam = teams.map(team => {
-      const wins = winsByTeam[team.name] || 0
-      const total = requests.filter(
-        request => request.team === team.name,
-      ).length
-      const completion = total > 0 ? (wins / total) * 100 : 0
+      const uniqueWinnerCount = new Set(
+        requests
+          .filter(request => request.team === team.name && request.isFlag)
+          .map(request => request.ip),
+      ).size
+      const completion =
+        uniqueWinnerCount > 0 ? (uniqueWinnerCount / team.size) * 100 : 0
       return { team: team.name, completion }
     })
 
