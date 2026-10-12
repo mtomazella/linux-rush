@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Lab1",
+    "lowerIpRange": "",
+    "upperIpRange": "",
+    "size": 10
+  },
+  {
+    "name": "Lab2",
+    "lowerIpRange": "",
+    "upperIpRange": "",
+    "size": 10
+  },
+  {
+    "name": "Lab3",
+    "lowerIpRange": "",
+    "upperIpRange": "",
+    "size": 10
+  },
+  {
+    "name": "Lab4",
+    "lowerIpRange": "",
+    "upperIpRange": "",
+    "size": 10
+  }
+]
