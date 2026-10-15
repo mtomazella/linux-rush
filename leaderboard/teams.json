@@ -1,26 +1,22 @@
 [
   {
     "name": "Lab1",
-    "lowerIpRange": 0,
-    "upperIpRange": 50,
+    "ipNumber": 1,
     "size": 42
   },
   {
     "name": "Lab2",
-    "lowerIpRange": 51,
-    "upperIpRange": 100,
+    "ipNumber": 2,
     "size": 20
   },
   {
     "name": "Lab3",
-    "lowerIpRange": 101,
-    "upperIpRange": 150,
+    "ipNumber": 3,
     "size": 35
   },
   {
     "name": "Lab4",
-    "lowerIpRange": 150,
-    "upperIpRange": 200,
+    "ipNumber": 4,
     "size": 10
   }
 ]

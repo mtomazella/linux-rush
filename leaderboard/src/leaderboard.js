@@ -10,7 +10,8 @@ exports.leaderboardRoute = async (req, res) => {
         ...request,
         team:
           teams.find(team => {
-            const ipNum = parseInt(ip.split('.').pop(), 10)
+            const ipElements = ip.split('.')
+            const ipNum = parseInt(ipElements.at(-2), 10)
             return ipNum >= team.lowerIpRange && ipNum <= team.upperIpRange
           })?.name || 'Unknown',
         isFlag: path === process.env.FLAG,
