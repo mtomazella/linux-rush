@@ -12,7 +12,7 @@ exports.leaderboardRoute = async (req, res) => {
           teams.find(team => {
             const ipElements = ip.split('.')
             const ipNum = parseInt(ipElements.at(-2), 10)
-            return ipNum >= team.lowerIpRange && ipNum <= team.upperIpRange
+            return ipNum === team.ipNumber
           })?.name || 'Unknown',
         isFlag: path === process.env.FLAG,
       }
